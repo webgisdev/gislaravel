@@ -1,4 +1,7 @@
 version: "3.7"
+volumes:
+    postgres-data:
+    redis-data:
 networks:
     frontend:
     backend:
@@ -20,5 +23,28 @@ services:
         image: laravelgis-php:latest
         volumes:
             - ./:/var/www/app
+        networks:
+            - backend
+    postgres:
+        image: postgres:latest
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        ports:
+            - "5432:5432"
+        environment:
+            POSTGRES_PASSWORD: 12345
+            POSTGRES_USER: laravelgis
+            POSTGRES_DB: laravelgis
+            PGDATA: /var/lib/postgresql/data
+        networks:
+            - backend
+    redis:
+        image: redis:latest
+        sysctls:
+            - net.core.somaxconn=511
+        ports:
+            - "6379:6379"
+        volumes:
+            - redis-data:/data
         networks:
             - backend
