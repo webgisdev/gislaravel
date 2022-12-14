@@ -53,8 +53,6 @@ services:
             - backend
     geoserver:
         image: kartoza/geoserver:latest
-        ports:
-            - "8081:8080"
         volumes:
             - geoserver-data:/opt/geoserver/data_dir
         environment:

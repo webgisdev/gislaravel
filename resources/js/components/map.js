@@ -25,7 +25,7 @@ document.addEventListener("alpine:init", () => {
                 }
 
                 const urlParams = new URLSearchParams(paramsObj)
-                const monumentsUrl = 'http://localhost:8081/geoserver/wfs?' + urlParams.toString()
+                const monumentsUrl = 'http://localhost:8080/geoserver/wfs?' + urlParams.toString()
 
                 this.monumentsLayer = new VectorLayer({
                     source: new VectorSource({
