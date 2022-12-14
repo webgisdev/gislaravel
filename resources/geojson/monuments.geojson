@@ -1,48 +1,73 @@
 {
     "type": "FeatureCollection",
-    "features": [
-        {
+    "features": [{
             "type": "Feature",
             "properties": {
                 "name": "Eiffel Tower",
-                "image": "https://en.wikipedia.org/wiki/Eiffel_Tower#/media/File:Tour_Eiffel_Wikimedia_Commons.jpg"
+                "image": "/img/eiffel-tower.jpg"
             },
             "geometry": {
                 "type": "Point",
-                "coordinates": [2.2944960089681175, 48.85824068679814]
+                "coordinates": [
+                    2.2944960089681175,
+                    48.85824068679814
+                ]
             }
         },
         {
             "type": "Feature",
             "properties": {
                 "name": "Statue of Liberty",
-                "image": "https://en.wikipedia.org/wiki/Statue_of_Liberty#/media/File:Lady_Liberty_under_a_blue_sky_(cropped).jpg"
+                "image": "/img/statue-of-liberty.jpg"
             },
             "geometry": {
                 "type": "Point",
-                "coordinates": [-74.04455265662958, 40.68928126997774]
+                "coordinates": [
+                    -74.04455265662958,
+                    40.68928126997774
+                ]
             }
         },
         {
             "type": "Feature",
             "properties": {
                 "name": "Rome Colosseum",
-                "image": "https://en.wikipedia.org/wiki/Colosseum#/media/File:Colosseo_2020.jpg"
+                "image": "/img/rome-colosseum.jpg"
             },
             "geometry": {
                 "type": "Point",
-                "coordinates": [12.492283213388305, 41.890266877448695]
+                "coordinates": [
+                    12.492283213388305,
+                    41.890266877448695
+                ]
             }
         },
         {
             "type": "Feature",
             "properties": {
                 "name": "Door of No Return",
-                "image": "https://en.wikipedia.org/wiki/Door_of_No_Return,_Ouidah#/media/File:The_Door_of_No_Return_in_Ouidah,_November_2007_(3).jpg"
+                "image": "/img/door-of-no-return.jpg"
             },
             "geometry": {
                 "type": "Point",
-                "coordinates": [2.0895860296820206, 6.324244153348859]
+                "coordinates": [
+                    2.0895860296820206,
+                    6.324244153348859
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "name": "Ciudad Mitad del Mundo",
+                "image": "/img/ciudad-mitad-del-mundo.jpg"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -78.4558392183774,
+                    -0.002185609003195849
+                ]
             }
         }
     ]
