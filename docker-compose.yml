@@ -28,7 +28,7 @@ services:
         networks:
             - backend
     postgres:
-        image: postgres:latest
+        image: postgis/postgis:15-3.3
         volumes:
             - postgres-data:/var/lib/postgresql/data
         ports:
