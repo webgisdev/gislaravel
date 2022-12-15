@@ -1,66 +1,38 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel GIS
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Why Laravel GIS?
 
-## About Laravel
+Laravel GIS is an ongoing project with all explanations available at [LaravelGIS](https://www.laravelgis.com/)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+In this learning/educational project I will try to cover and implement most of the common Geographical Information Systems feature needs using postgis, geoserver, openlayers and Laravel through the design and development of a single Laravel project.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+I'm building this project as if it was a full course aimed at Laravel developers who want to get into the GIS world and I might add screencasts to some/all of the posts in the future.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+I will try to make one commit per post and reference it at the end of each post, the post itself will explains the details.
 
-## Learning Laravel
+You should be able to follow along on a Ubuntu development machine, but also on any platform running docker.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+If you have any question and/or comment, please create an account on [LaravelGIS](https://www.laravelgis.com/register) and post a comment on a post.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### About me and the stack
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+I've been working as a developer with commercial and opensource GIS software for more than 20 years. I kind of let the commercial ESRI/Microsoft a few years ago to concentrate on opensource. In my opinion, the Laravel framework is a piece of beauty for backend development, the developer experience is simply amazing. So my goto Web/GIS backend stack is now:
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+* [Laravel](https://laravel.com/)
+* [PostGIS](https://postgis.net/)
+* [Geoserver](http://geoserver.org/)
 
-### Premium Partners
+I'm really more on the backend/devops than on the frontend when it comes to web development so the frontend stack I use is a minimal one: Alpine.js. As stated by Caleb Porzio, it's creator, "Alpine is a rugged, minimal tool for composing behavior directly in your markup". It's syntax is very similar to Vuejs so, if you are familiar with Vue, learning Alpine is a piece of cake.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Along with Alpine.js, I also heavily use Laravel Livewire, a Laravel package also created by Caleb Porzio. Livewire is like magic as is allows the creation of frontend reactive backend components in Laravel using it's blade templating engine. Finally, the last piece of the frontend puzzle is OpenLayers, which is, in my opinion, the most complete Javascript mapping library.
 
-## Contributing
+* [Alpine.js](https://alpinejs.dev/)
+* [Laravel Livewire](https://laravel-livewire.com/)
+* [OpenLayers](https://openlayers.org/)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+As a development stack, we will use docker (it is actually the only required dependency for the project)
 
-## Code of Conduct
+* [Docker](https://www.docker.com/)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Laravel offer a great [Docker](https://www.docker.com/) environment with [Laravel Sail](https://laravel.com/docs/9.x/sail) but we will try to work with docker directly in order to have complete control over the docker images we use. Docker might be intimidating at first but is really powerful and will allow us to have the perfect PHP/Laravel development environment with all of our dependencies running smoothly.
