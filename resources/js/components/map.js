@@ -7,6 +7,7 @@ import OSM from "ol/source/OSM.js";
 import { Style, Fill, Stroke, Circle, Text } from "ol/style.js";
 import GeoJSON from "ol/format/GeoJSON";
 import Overlay from "ol/Overlay.js";
+import { bbox as bboxStrategy } from "ol/loadingstrategy.js";
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("map", function () {
@@ -14,20 +15,61 @@ document.addEventListener("alpine:init", () => {
             legendOpened: false,
             map: {},
             initComponent() {
-                const paramsObj = {
+                let paramsObj = {
                     servive: "WFS",
                     version: "2.0.0",
                     request: "GetFeature",
-                    typeName: "laravelgis:monuments",
                     outputFormat: "application/json",
                     crs: "EPSG:4326",
                     srsName: "EPSG:4326",
                 };
 
-                const urlParams = new URLSearchParams(paramsObj);
-                const monumentsUrl =
-                    "http://localhost:8080/geoserver/wfs?" +
-                    urlParams.toString();
+                const baseUrl = "http://localhost:8080/geoserver/wfs?";
+
+                let monumentsLayer = new VectorLayer({
+                    source: new VectorSource({
+                        format: new GeoJSON(),
+                        url: (extent) => {
+                            paramsObj.typeName = "laravelgis:monuments";
+                            paramsObj.bbox = extent.join(",") + ",EPSG:4326";
+                            let urlParams = new URLSearchParams(paramsObj);
+                            return baseUrl + urlParams.toString();
+                        },
+                        strategy: bboxStrategy,
+                    }),
+                    style: this.monumentsStyleFunction,
+                    label: 'Monuments',
+                });
+
+                let worldAdministrativeBoundariesLayer = new VectorLayer({
+                    source: new VectorSource({
+                        format: new GeoJSON(),
+                        url: (extent) => {
+                            paramsObj.typeName = "laravelgis:world-administrative-boundaries";
+                            paramsObj.bbox = extent.join(",") + ",EPSG:4326";
+                            let urlParams = new URLSearchParams(paramsObj);
+                            return baseUrl + urlParams.toString();
+                        },
+                        strategy: bboxStrategy,
+                    }),
+                    style: this.worldAdministrativeBoundariesStyleFunction,
+                    label: 'World Administrative Boundaries',
+                });
+
+                let worldRiversLayer = new VectorLayer({
+                    source: new VectorSource({
+                        format: new GeoJSON(),
+                        url: (extent) => {
+                            paramsObj.typeName = "laravelgis:world-rivers";
+                            paramsObj.bbox = extent.join(",") + ",EPSG:4326";
+                            let urlParams = new URLSearchParams(paramsObj);
+                            return baseUrl + urlParams.toString();
+                        },
+                        strategy: bboxStrategy,
+                    }),
+                    style: this.worldRiversStyleFunction,
+                    label: 'World Rivers',
+                });
 
                 this.map = new Map({
                     target: this.$refs.map,
@@ -36,19 +78,14 @@ document.addEventListener("alpine:init", () => {
                             source: new OSM(),
                             label: 'OpenStreetMap',
                         }),
-                        new VectorLayer({
-                            source: new VectorSource({
-                                format: new GeoJSON(),
-                                url: monumentsUrl,
-                            }),
-                            style: this.styleFunction,
-                            label: 'Monuments',
-                        }),
+                        worldAdministrativeBoundariesLayer,
+                        worldRiversLayer,
+                        monumentsLayer
                     ],
                     view: new View({
                         projection: "EPSG:4326",
-                        center: [0, 0],
-                        zoom: 2,
+                        center: [-78.2161, -0.7022],
+                        zoom: 8,
                     }),
                     overlays: [
                         new Overlay({
@@ -106,7 +143,7 @@ document.addEventListener("alpine:init", () => {
                 overlay.setPosition(undefined)
                 this.$refs.popupContent.innerHTML = ''
             },
-            styleFunction(feature, resolution) {
+            monumentsStyleFunction(feature, resolution) {
                 return new Style({
                     image: new Circle({
                         radius: 4,
@@ -132,6 +169,47 @@ document.addEventListener("alpine:init", () => {
                         }),
                         padding: [5, 2, 2, 5],
                     }),
+                });
+            },
+            worldAdministrativeBoundariesStyleFunction(feature, resolution) {
+                return new Style({
+                    fill: new Fill({
+                        color: "rgba(125, 125, 125, 0.1)",
+                    }),
+                    stroke: new Stroke({
+                        color: "rgba(125, 125, 125, 1)",
+                        width: 2,
+                    }),
+                    text: new Text({
+                        font: "16px serif bold",
+                        text: feature.get("name"),
+                        fill: new Fill({
+                            color: "rgba(32, 32, 32, 1)",
+                        }),
+                    }),
+                });
+            },
+            worldRiversStyleFunction(feature, resolution) {
+                let text;
+                let width = 2;
+                if(resolution < 0.002){
+                    text = new Text({
+                        font: "20px serif",
+                        text: feature.get("river_map"),
+                        fill: new Fill({
+                            color: "rgba(0, 0, 255, 1)",
+                        }),
+                    });
+
+                    width = 4;
+                }
+
+                return new Style({
+                    stroke: new Stroke({
+                        color: "rgba(0, 0, 255, 1)",
+                        width: width,
+                    }),
+                    text: text,
                 });
             },
             gotoFeature(feature) {
