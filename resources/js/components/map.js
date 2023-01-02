@@ -1,13 +1,24 @@
 import Map from "ol/Map.js";
 import View from "ol/View.js";
-import TileLayer from "ol/layer/Tile.js";
+import {
+    Tile as TileLayer
+} from 'ol/layer.js';
 import VectorSource from "ol/source/Vector";
 import VectorLayer from "ol/layer/Vector";
 import OSM from "ol/source/OSM.js";
-import { Style, Fill, Stroke, Circle, Text } from "ol/style.js";
+import {
+    Style,
+    Fill,
+    Stroke,
+    Circle,
+    Text
+} from "ol/style.js";
 import GeoJSON from "ol/format/GeoJSON";
 import Overlay from "ol/Overlay.js";
-import { bbox as bboxStrategy } from "ol/loadingstrategy.js";
+import {
+    bbox as bboxStrategy
+} from "ol/loadingstrategy.js";
+import TileWMS from 'ol/source/TileWMS.js';
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("map", function () {
@@ -41,33 +52,27 @@ document.addEventListener("alpine:init", () => {
                     label: 'Monuments',
                 });
 
-                let worldAdministrativeBoundariesLayer = new VectorLayer({
-                    source: new VectorSource({
-                        format: new GeoJSON(),
-                        url: (extent) => {
-                            paramsObj.typeName = "laravelgis:world-administrative-boundaries";
-                            paramsObj.bbox = extent.join(",") + ",EPSG:4326";
-                            let urlParams = new URLSearchParams(paramsObj);
-                            return baseUrl + urlParams.toString();
+                let worldAdministrativeBoundariesLayer = new TileLayer({
+                    source: new TileWMS({
+                        url: 'http://localhost:8080/geoserver/wms',
+                        params: {
+                            'LAYERS': 'laravelgis:world-administrative-boundaries',
+                            'TILED': true
                         },
-                        strategy: bboxStrategy,
+                        serverType: 'geoserver',
                     }),
-                    style: this.worldAdministrativeBoundariesStyleFunction,
                     label: 'World Administrative Boundaries',
                 });
 
-                let worldRiversLayer = new VectorLayer({
-                    source: new VectorSource({
-                        format: new GeoJSON(),
-                        url: (extent) => {
-                            paramsObj.typeName = "laravelgis:world-rivers";
-                            paramsObj.bbox = extent.join(",") + ",EPSG:4326";
-                            let urlParams = new URLSearchParams(paramsObj);
-                            return baseUrl + urlParams.toString();
+                let worldRiversLayer = new TileLayer({
+                    source: new TileWMS({
+                        url: 'http://localhost:8080/geoserver/wms',
+                        params: {
+                            'LAYERS': 'laravelgis:world-rivers',
+                            'TILED': true
                         },
-                        strategy: bboxStrategy,
+                        serverType: 'geoserver',
                     }),
-                    style: this.worldRiversStyleFunction,
                     label: 'World Rivers',
                 });
 
@@ -131,8 +136,7 @@ document.addEventListener("alpine:init", () => {
 
                                 return
                             }
-                        },
-                        {
+                        }, {
                             hitTolerance: 5,
                         }
                     );
@@ -169,47 +173,6 @@ document.addEventListener("alpine:init", () => {
                         }),
                         padding: [5, 2, 2, 5],
                     }),
-                });
-            },
-            worldAdministrativeBoundariesStyleFunction(feature, resolution) {
-                return new Style({
-                    fill: new Fill({
-                        color: "rgba(125, 125, 125, 0.1)",
-                    }),
-                    stroke: new Stroke({
-                        color: "rgba(125, 125, 125, 1)",
-                        width: 2,
-                    }),
-                    text: new Text({
-                        font: "16px serif bold",
-                        text: feature.get("name"),
-                        fill: new Fill({
-                            color: "rgba(32, 32, 32, 1)",
-                        }),
-                    }),
-                });
-            },
-            worldRiversStyleFunction(feature, resolution) {
-                let text;
-                let width = 2;
-                if(resolution < 0.002){
-                    text = new Text({
-                        font: "20px serif",
-                        text: feature.get("river_map"),
-                        fill: new Fill({
-                            color: "rgba(0, 0, 255, 1)",
-                        }),
-                    });
-
-                    width = 4;
-                }
-
-                return new Style({
-                    stroke: new Stroke({
-                        color: "rgba(0, 0, 255, 1)",
-                        width: width,
-                    }),
-                    text: text,
                 });
             },
             gotoFeature(feature) {
