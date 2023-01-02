@@ -29,7 +29,7 @@ class ReloadMonuments extends Command
      */
     public function handle()
     {
-        $geojson = file_get_contents(resource_path('/geojson/monuments.geojson'));
+        $geojson = file_get_contents(resource_path('/geodata/geojson/monuments.geojson'));
 
         Monument::truncate();
 

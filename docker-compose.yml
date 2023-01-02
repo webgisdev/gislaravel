@@ -42,7 +42,7 @@ services:
         networks:
             - backend
     redis:
-        image: redis:latest
+        image: redis:7
         sysctls:
             - net.core.somaxconn=511
         ports:
@@ -52,7 +52,7 @@ services:
         networks:
             - backend
     geoserver:
-        image: kartoza/geoserver:latest
+        image: kartoza/geoserver:2.22.0
         volumes:
             - geoserver-data:/opt/geoserver/data_dir
         environment:
