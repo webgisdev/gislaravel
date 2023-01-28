@@ -32,7 +32,7 @@
                             <ogc:PropertyName>name</ogc:PropertyName>
                         </Label>
                         <Font>
-                            <CssParameter name="font-family">serif</CssParameter>
+                            <CssParameter name="font-family">Serif.plain</CssParameter>
                             <CssParameter name="font-size">16</CssParameter>
                             <CssParameter name="font-style">bold</CssParameter>
                         </Font>
@@ -83,7 +83,7 @@
                             <ogc:PropertyName>name</ogc:PropertyName>
                         </Label>
                         <Font>
-                            <CssParameter name="font-family">serif</CssParameter>
+                            <CssParameter name="font-family">Serif.plain</CssParameter>
                             <CssParameter name="font-size">16</CssParameter>
                             <CssParameter name="font-style">bold</CssParameter>
                         </Font>
@@ -134,7 +134,7 @@
                             <ogc:PropertyName>name</ogc:PropertyName>
                         </Label>
                         <Font>
-                            <CssParameter name="font-family">serif</CssParameter>
+                            <CssParameter name="font-family">Serif.plain</CssParameter>
                             <CssParameter name="font-size">16</CssParameter>
                             <CssParameter name="font-style">bold</CssParameter>
                         </Font>
@@ -185,7 +185,7 @@
                             <ogc:PropertyName>name</ogc:PropertyName>
                         </Label>
                         <Font>
-                            <CssParameter name="font-family">serif</CssParameter>
+                            <CssParameter name="font-family">Serif.plain</CssParameter>
                             <CssParameter name="font-size">16</CssParameter>
                             <CssParameter name="font-style">bold</CssParameter>
                         </Font>
@@ -236,7 +236,7 @@
                             <ogc:PropertyName>name</ogc:PropertyName>
                         </Label>
                         <Font>
-                            <CssParameter name="font-family">serif</CssParameter>
+                            <CssParameter name="font-family">Serif.plain</CssParameter>
                             <CssParameter name="font-size">16</CssParameter>
                             <CssParameter name="font-style">bold</CssParameter>
                         </Font>
@@ -287,7 +287,7 @@
                             <ogc:PropertyName>name</ogc:PropertyName>
                         </Label>
                         <Font>
-                            <CssParameter name="font-family">serif</CssParameter>
+                            <CssParameter name="font-family">Serif.plain</CssParameter>
                             <CssParameter name="font-size">16</CssParameter>
                             <CssParameter name="font-style">bold</CssParameter>
                         </Font>

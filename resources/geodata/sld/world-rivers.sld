@@ -46,7 +46,7 @@
                             <CssParameter name="fill">#1e40af</CssParameter>
                         </Fill>
                         <Font>
-                            <CssParameter name="font-family">serif</CssParameter>
+                            <CssParameter name="font-family">Serif.plain</CssParameter>
                             <CssParameter name="font-size">16</CssParameter>
                         </Font>
                         <VendorOption name="followLine">true</VendorOption>
