@@ -6,14 +6,13 @@ import {
 import OSM from "ol/source/OSM.js";
 import Overlay from "ol/Overlay.js";
 import TileWMS from 'ol/source/TileWMS.js';
-import Feature from "ol/Feature";
-import Point from 'ol/geom/Point.js';
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("map", function () {
         return {
             legendOpened: false,
             map: {},
+            activeTab: 'legend',
             initComponent() {
                 let monumentsLayer = new TileLayer({
                     source: new TileWMS({
@@ -99,35 +98,7 @@ document.addEventListener("alpine:init", () => {
                             .then((response) => response.json())
                             .then((json) => {
                                 if (json.features.length > 0) {
-                                    let jsonFeature = json.features[0]
-
-                                    let feature = new Feature({
-                                        geometry: new Point(jsonFeature.geometry.coordinates),
-                                        name: jsonFeature.properties.name,
-                                        image: jsonFeature.properties.image
-                                    })
-
-                                    this.gotoFeature(feature)
-
-                                    let content =
-                                        '<h4 class="text-gray-500 font-bold">' +
-                                        feature.get('name') +
-                                        '</h4>'
-
-                                    content +=
-                                        '<img src="' +
-                                        feature.get('image') +
-                                        '" class="mt-2 w-full max-h-[200px] rounded-md shadow-md object-contain overflow-clip">'
-
-                                    this.$refs.popupContent.innerHTML = content
-
-                                    setTimeout(() => {
-                                        overlay.setPosition(
-                                            feature.getGeometry().getCoordinates()
-                                        );
-                                    }, 500)
-
-                                    return
+                                    this.gotoMonument(json.features[0])
                                 }
                             });
                     }
@@ -139,12 +110,31 @@ document.addEventListener("alpine:init", () => {
                 overlay.setPosition(undefined)
                 this.$refs.popupContent.innerHTML = ''
             },
-            gotoFeature(feature) {
+            gotoMonument(jsonFeature) {
                 this.map.getView().animate({
-                    center: feature.getGeometry().getCoordinates(),
+                    center: jsonFeature.geometry.coordinates,
                     zoom: 15,
                     duration: 500,
                 });
+
+                let content =
+                    '<h4 class="text-gray-500 font-bold">' +
+                    jsonFeature.properties.name +
+                    '</h4>'
+
+                content +=
+                    '<img src="' +
+                    jsonFeature.properties.image +
+                    '" class="mt-2 w-full max-h-[200px] rounded-md shadow-md object-contain overflow-clip">'
+
+                this.$refs.popupContent.innerHTML = content
+
+                setTimeout(() => {
+                    this.map.getOverlayById('info').setPosition(
+                        jsonFeature.geometry.coordinates
+                    );
+                }, 500)
+
             },
             hasLegend(layer) {
                 return layer.getSource() instanceof TileWMS
