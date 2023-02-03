@@ -23,4 +23,5 @@
     @if ($monuments->hasPages())
         <div class="mt-4">{{ $monuments->links() }}</div>
     @endif
+
 </div>

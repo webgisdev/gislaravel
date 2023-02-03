@@ -1,4 +1,4 @@
-<div x-data="map()" x-init="initComponent()">
+<div x-data="map()" x-init="initComponent()" x-on:new-monument.window="gotoMonument(JSON.parse($event.detail.monument))">
     <div x-ref="map" class="relative h-[600px] overflow-clip rounded-md border border-slate-300 shadow-lg">
         <div class="absolute top-2 right-8 z-10 rounded-md bg-white bg-opacity-75">
             <div class="ol-unselectable ol-control">
@@ -23,20 +23,20 @@
                 <div class="flex items-center justify-between pr-1">
                     <div class="flex justify-start space-x-3">
                         <h3 x-on:click.prevend="activeTab = 'legend'" class="cursor-pointer text-slate-700"
-                            x-bind:class="activeTab === 'legend' && 'font-bold'">Legend</h3>
+                            x-bind:class="activeTab === 'legend' && 'font-bold'" title="Map's legend">Legend</h3>
                         <h3 x-on:click.prevend="activeTab = 'monuments'" class="cursor-pointer text-slate-700"
-                            x-bind:class="activeTab === 'monuments' && 'font-bold'">Monuments</h3>
+                            x-bind:class="activeTab === 'monuments' && 'font-bold'" title="Monuments list">List</h3>
+                        <h3 x-on:click.prevend="activeTab = 'create-monument'" class="cursor-pointer text-slate-700"
+                            x-bind:class="activeTab === 'create-monument' && 'font-bold'" title="Create new monument">New</h3>
                     </div>
                     <button x-on:click.prevent="legendOpened = false"
                         class="mb-1 text-2xl font-black text-slate-400 transition hover:text-[#3369A1] focus:text-[#3369A1] focus:outline-none">&times;</button>
                 </div>
-                <ul x-show="activeTab === 'legend'" x-transition:enter="transition-opacity duration-150"
+                <ul x-show="activeTab === 'legend'" x-transition:enter="transition-opacity duration-300"
                     x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                    x-transition:leave="transition-opacity duration-150" x-transition:leave-start="opacity-100"
-                    x-transition:leave-end="opacity-0"
                     class="mt-2 p-1 space-y-1 rounded-md border border-slate-300 bg-white">
                     <template x-for="(layer, index) in map.getAllLayers().reverse()" :key="index">
-                        <li class="flex items-center p-0.5">
+                        <li x-show="layer.get('label')" class="flex items-center p-0.5">
                             <div x-id="['legend-range']" class="w-full rounded-md border border-gray-300 px-2 py-1">
                                 <div class="space-y-1">
                                     <label x-bind:for="$id('legend-range')" class="flex items-center">
@@ -55,11 +55,15 @@
                         </li>
                     </template>
                 </ul>
-                <div x-show="activeTab === 'monuments'" x-transition:enter="transition-opacity duration-150"
+                <div x-show="activeTab === 'monuments'" x-transition:enter="transition-opacity duration-300"
                     x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                    x-transition:leave="transition-opacity duration-150" x-transition:leave-start="opacity-100"
-                    x-transition:leave-end="opacity-0" class="mt-2 p-1 rounded-md border border-slate-300 bg-white">
+                     class="mt-2 p-1 rounded-md border border-slate-300 bg-white">
                     <livewire:monuments.index />
+                </div>
+                <div x-show="activeTab === 'create-monument'" x-transition:enter="transition-opacity duration-300"
+                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+                    class="mt-2 p-1 rounded-md border border-slate-300 bg-white">
+                    <livewire:monuments.create />
                 </div>
             </div>
         </div>

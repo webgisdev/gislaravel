@@ -13,6 +13,8 @@ class Index extends Component
 
     public $search;
 
+    protected $listeners = ['saved' => 'render'];
+
     public function updatedSearch()
     {
         $this->resetPage();
