@@ -1,7 +1,7 @@
 Why this project?
 -----------------
 
-Imporant notice: Following this [Tweet](https://twitter.com/taylorotwell/status/1620893768038719494) by Taylor Otwell (the creator of Laravel) and to avoid any confusion, I've decided to rename the project to Web GIS Project with Laravel and to change the domain name to [www.webgis.dev](https://www.webgis.dev). The Github repository (and username) has also changed and is now available at [https://github.com/webgisdev/gislaravel](https://github.com/webgisdev/gislaravel). Finally, the Twitter account is now @gislaravel. A redirection from the old domain name to the new one is in place and will be active for a few months.
+Important notice: Following this [Tweet](https://twitter.com/taylorotwell/status/1620893768038719494) by Taylor Otwell (the creator of Laravel) and to be in compliance with [Laravel trademark](https://laravel.com/trademark), I decided to rename the project to Web GIS Project with Laravel and to change the domain name to [www.webgis.dev](https://www.webgis.dev). A redirection from the old domain name to the new one is in place and will be active for a few months. The GitHub repository (and username) has also changed and is now available at [https://github.com/webgisdev/gislaravel](https://github.com/webgisdev/gislaravel). Finally, the Twitter account is now @gislaravel.
 
 Web GIS Project with Laravel is a learning/educational project covering and implementing most of the common Geographical Information Systems feature needs using PostGIS, GeoServer, OpenLayers, and Laravel through the design and development of a single Laravel project.
 
