@@ -1,0 +1,5 @@
+@import 'filepond/dist/filepond.min.css';
+
+.filepond--panel-root {
+    background-color: #fff;
+}

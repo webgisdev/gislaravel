@@ -26,6 +26,7 @@ services:
             - "5173:5173"
         volumes:
             - ./:/var/www/app
+            - ./docker/php/php.ini:/usr/local/etc/php/php.ini
         networks:
             - backend
     postgres:

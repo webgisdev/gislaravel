@@ -36,10 +36,16 @@ return [
             'throw' => false,
         ],
 
+        'monuments' => [
+            'driver' => 'local',
+            'root' => storage_path('monuments'),
+            'throw' => false,
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],

@@ -18,6 +18,10 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
+        "filepond": "^4.30.4",
+        "filepond-plugin-file-validate-size": "^2.2.8",
+        "filepond-plugin-file-validate-type": "^1.2.8",
+        "filepond-plugin-image-preview": "^4.6.11",
         "ol": "^7.1.0"
     },
     "version": "0.1.0"

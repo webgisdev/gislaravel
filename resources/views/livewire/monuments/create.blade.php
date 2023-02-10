@@ -28,6 +28,12 @@
             <x-jet-input-error for="name" class="mt-1" />
         </div>
 
+        <div>
+            <x-input.label for="upload" value="Picture" />
+            <x-input.image wire:model.defer="upload"/>
+            <x-jet-input-error for="upload" class="mt-1" />
+        </div>
+
         <div class="pt-3 flex justify-end items-center space-x-3">
             <x-jet-action-message class="mr-3" on="saved" />
 

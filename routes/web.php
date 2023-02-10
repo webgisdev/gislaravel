@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MonumentsImagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,5 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/monuments/{monument}/image', MonumentsImagesController::class)->name('monument-image');

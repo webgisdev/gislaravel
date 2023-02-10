@@ -157,7 +157,10 @@ document.addEventListener("alpine:init", () => {
                 let content =
                     '<h4 class="text-gray-500 font-bold">' +
                     jsonFeature.properties.name +
-                    '</h4>'
+                    '</h4>' +
+                    '<p class="text-gray-400 text-xs italic">Created by ' +
+                    jsonFeature.properties.user_name +
+                    '</p>'
 
                 let image = jsonFeature.properties.image || '/img/placeholder-image.png'
                 content +=

@@ -1,4 +1,4 @@
-FROM php:8.1-fpm
+FROM php:8.2-fpm
 
 RUN apt-get update \
     && apt-get install -y gnupg curl wget ca-certificates unzip lsb-release \
@@ -10,7 +10,7 @@ RUN apt-get update \
         libpq-dev \
         libzip-dev \
         nodejs \
-        postgresql-client-14 \
+        postgresql-client-15 \
     && pecl install redis \
     && docker-php-ext-enable redis \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
