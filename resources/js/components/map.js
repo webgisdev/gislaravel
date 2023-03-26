@@ -98,8 +98,8 @@ document.addEventListener("alpine:init", () => {
                     ],
                     view: new View({
                         projection: "EPSG:4326",
-                        center: [-78.2161, -0.7022],
-                        zoom: 8,
+                        center: [0, 0],
+                        zoom: 3,
                     }),
                     overlays: [
                         new Overlay({
@@ -223,6 +223,27 @@ document.addEventListener("alpine:init", () => {
                 this.map.removeInteraction(this.draw);
 
                 this.mode = "view";
+            },
+            gotoCurrentLocation() {
+                if ("geolocation" in navigator) {
+                    this.getPosition()
+                        .then((position) => {
+                            this.map.getView().animate({
+                                center: [position.coords.longitude, position.coords.latitude],
+                                zoom: 16,
+                                duration: 750,
+                            });
+                        })
+                }
+            },
+            getPosition(options = {
+                maximumAge: 0,
+                timeout: 5000,
+                enableHighAccuracy: true
+            }) {
+                return new Promise((resolve, reject) =>
+                    navigator.geolocation.getCurrentPosition(resolve, reject, options)
+                );
             }
         };
     });
